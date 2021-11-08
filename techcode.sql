@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Oct 30, 2021 at 11:05 PM
+-- Generation Time: Nov 08, 2021 at 03:50 PM
 -- Server version: 5.7.24
 -- PHP Version: 7.4.18
 
@@ -135,7 +135,7 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`id`, `uuid`, `role`, `can_delete`, `can_edit`, `can_insert`, `is_deleted`, `created_at`, `updated_at`) VALUES
 (1, 'ba6e3a04-302d-11ec-bbc5-34e6d722c12d', 'SuperAdmin', 1, 1, 1, 0, '2021-10-18 06:11:50', '2021-10-18 16:09:11'),
-(2, '68265b1a-305f-11ec-bbc5-34e6d722c12d', 'Dosen', 1, 1, 1, 0, '2021-10-18 22:04:41', '2021-10-23 02:43:24'),
+(2, '68265b1a-305f-11ec-bbc5-34e6d722c12d', 'Dosen', 0, 0, 0, 0, '2021-10-18 22:04:41', '2021-11-06 06:06:45'),
 (3, 'cb2363a7-3091-11ec-bbc5-34e6d722c12d', 'Mahasiswa', 0, 1, 1, 0, '2021-10-19 04:05:22', '2021-10-23 02:43:52');
 
 -- --------------------------------------------------------
@@ -159,8 +159,9 @@ CREATE TABLE `ukm` (
 --
 
 INSERT INTO `ukm` (`id`, `uuid`, `slug`, `nama_ukm`, `is_active`, `created_at`, `updated_at`) VALUES
-(1, '3cdd9b69-33ab-11ec-a6ad-34e6d722c12d', 'UKM-Pemrograman', 'UKM Pemrograman', 1, '2021-10-23 02:45:09', '2021-10-24 10:48:50'),
-(2, 'a8c272c5-33ae-11ec-a6ad-34e6d722c12d', 'UKM-Gumpala', 'UKM Gumpala', 1, '2021-10-23 03:09:39', '2021-10-23 03:09:39');
+(1, '3cdd9b69-33ab-11ec-a6ad-34e6d722c12d', 'Techcode', 'Techcode', 1, '2021-10-23 02:45:09', '2021-11-06 06:22:39'),
+(2, 'a8c272c5-33ae-11ec-a6ad-34e6d722c12d', 'Gumpala', 'Gumpala', 1, '2021-10-23 03:09:39', '2021-11-06 05:32:40'),
+(3, 'ec4c2db0-3ec2-11ec-8f8c-34e6d722c12d', 'Halu', 'Halu', 1, '2021-11-06 05:32:25', '2021-11-06 05:32:41');
 
 -- --------------------------------------------------------
 
@@ -238,6 +239,7 @@ CREATE TABLE `ukm_pengurus` (
   `ukm_id` int(11) UNSIGNED NOT NULL COMMENT 'ukm_id anggota',
   `jabatan_id` int(11) UNSIGNED NOT NULL COMMENT 'jabatan dalam ukm',
   `is_active` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'masih aktif atau tidak',
+  `periode_jabatan` varchar(10) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -254,9 +256,11 @@ CREATE TABLE `user` (
   `username` varchar(50) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(128) DEFAULT NULL,
+  `no_hp` varchar(13) DEFAULT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `role_id` int(10) UNSIGNED NOT NULL COMMENT 'id role untuk level akses',
   `is_active` tinyint(1) NOT NULL DEFAULT '1' COMMENT 'cek akun aktif',
+  `has_login` tinyint(1) NOT NULL DEFAULT '0',
   `is_deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT 'soft delete',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
@@ -266,11 +270,11 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `uuid`, `username`, `password`, `email`, `nama`, `role_id`, `is_active`, `is_deleted`, `created_at`, `updated`) VALUES
-(1, '59b129ee-306e-11ec-bbc5-34e6d722c12d', 'superadministrator', '$2y$10$hbuWbzLa0J6XZHl6NqttQOYL4LhFMQ.b5bn8B0q/0BFbCe5Kk9JGu', 'admin@gmail.com', 'Administrator', 1, 1, 0, '2021-10-18 23:51:40', '2021-10-26 07:53:09'),
-(2, '1c428aa6-34bd-11ec-a67b-34e6d722c12d', 'haerul', '$2y$10$tUkHiiE8PCMLp89EKJfhTe3tuI.j9HzOk49cJG0FH2xwq/13kG.GS', 'haerul@gmail.com', 'Haerul Fahmi, S.Kom, M.Kom', 2, 1, 0, '2021-10-24 11:25:33', '2021-10-24 11:25:33'),
-(3, '063109ab-34c3-11ec-a67b-34e6d722c12d', 'saleh', '$2y$10$W9xOdKJSLFr33EbaM1S28.A9T5ngwZxWZow0ITinlgry8qzzQsrau', 'saleh@gmail.com', 'Maemun Saleh, S.Kom', 2, 1, 0, '2021-10-24 12:07:53', '2021-10-24 12:07:53'),
-(5, 'd8c19ec3-3631-11ec-9e2b-34e6d722c12d', 'TI14170013', '$2y$10$79jb9U6lm6UJI8C571rQpu6mIoVpJmUGzTPSrnqoJr7RTBEBAFY5q', 'rocker.hunt@gmail.com', 'Ferdy Barliansyah R.', 3, 1, 0, '2021-10-26 07:53:45', '2021-10-26 07:53:45');
+INSERT INTO `user` (`id`, `uuid`, `username`, `password`, `email`, `no_hp`, `nama`, `role_id`, `is_active`, `has_login`, `is_deleted`, `created_at`, `updated`) VALUES
+(1, '59b129ee-306e-11ec-bbc5-34e6d722c12d', 'superadministrator', '$2y$10$hbuWbzLa0J6XZHl6NqttQOYL4LhFMQ.b5bn8B0q/0BFbCe5Kk9JGu', 'admin@gmail.com', NULL, 'Administrator', 1, 1, 1, 0, '2021-10-18 23:51:40', '2021-11-06 06:10:14'),
+(2, '1c428aa6-34bd-11ec-a67b-34e6d722c12d', 'haerul', '$2y$10$JKdY3fL93CTQM.FwPCMnSOgM/aX5kZVSakX8z.8ZzDVa4LGurtEW6', 'haerul@gmail.com', NULL, 'Haerul Fahmi, S.Kom, M.Kom', 2, 1, 1, 0, '2021-10-24 11:25:33', '2021-11-06 06:10:17'),
+(3, '063109ab-34c3-11ec-a67b-34e6d722c12d', 'saleh', '$2y$10$EX01z6Jz.hn54bv/NSHw1OuYVYriyvd6tDNtdUN3LuEmcrcVtQNkm', 'saleh@gmail.com', NULL, 'Maemun Saleh, S.Kom', 2, 1, 1, 0, '2021-10-24 12:07:53', '2021-11-06 06:10:20'),
+(5, 'd8c19ec3-3631-11ec-9e2b-34e6d722c12d', 'TI14170013', '$2y$10$79jb9U6lm6UJI8C571rQpu6mIoVpJmUGzTPSrnqoJr7RTBEBAFY5q', 'rocker.hunt@gmail.com', NULL, 'Ferdy Barliansyah R.', 3, 1, 1, 0, '2021-10-26 07:53:45', '2021-11-06 06:10:22');
 
 --
 -- Indexes for dumped tables
@@ -361,6 +365,7 @@ ALTER TABLE `user`
   ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `uuid` (`uuid`),
   ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `no_hp` (`no_hp`),
   ADD KEY `user_fk_role` (`role_id`);
 
 --
@@ -401,7 +406,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `ukm`
 --
 ALTER TABLE `ukm`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `ukm_aggota`

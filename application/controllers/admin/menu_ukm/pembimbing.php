@@ -17,9 +17,9 @@ class pembimbing extends CI_Controller
 		$sub_active = 'pembimbing';
 		$data = [
 			'title' => 'Pembimbing',
-			'url' => site_url('admin/' . $this->name . '/getList'),
-			'aksi' => site_url('admin/' . $this->name . '/aksi'),
-			'aktif' => site_url('admin/' . $this->name . '/aktif'),
+			'url' => site_url('admin/' . $this->name . '/pembimbing/getList'),
+			'aksi' => site_url('admin/' . $this->name . '/pembimbing/aksi'),
+			'aktif' => site_url('admin/' . $this->name . '/pembimbing/aktif'),
 			'role_access' => $this->auth->role_access(),
 			'active' => $this->name,
 			'sub_active' => $sub_active,
