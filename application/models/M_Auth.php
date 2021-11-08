@@ -23,7 +23,7 @@ class M_Auth extends CI_Model
 					'role_id' => $cek->role_id
 				];
 				$this->session->set_userdata($data);
-				redirect('admin/dashboard');
+				redirect('/');
 			} else {
 				$this->session->set_flashdata('error', 'Username atau password salah');
 				redirect('auth');

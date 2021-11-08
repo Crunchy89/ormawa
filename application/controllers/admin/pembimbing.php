@@ -43,25 +43,13 @@ class pembimbing extends CI_Controller
 			$rows[] = $row->nama_ukm;
 			$rows[] = $row->nama;
 			if ($role->can_edit) {
-				if ($row->is_active) {
-					$rows[] = '
-					<button type="button" data-id="' . $row->id . '" data-ukm_id="' . $row->ukm_id . '" class="aktif btn btn-sm btn-success disable" disabled>Aktif</button>
+				$rows[] = '
+					<button type="button" data-id="' . $row->id . '" data-ukm_id="' . $row->ukm_id . '" class="aktif btn btn-sm ' . ($row->is_active == 1 ? "btn-success disable" : "btn-danger") . '" ' . ($row->is_active == 1 ? "disabled" : "") . '>' . ($row->is_active == 1 ? "Aktif" : "Nonaktif") . '</button>
 					';
-				} else {
-					$rows[] = '
-					<button type="button" data-id="' . $row->id . '" data-ukm_id="' . $row->ukm_id . '" class="aktif btn btn-sm btn-danger">Nonaktif</button>
-					';
-				}
 			} else {
-				if ($row->is_active) {
-					$rows[] = '
-					<button type="button" data-id="' . $row->id . '" data-ukm_id="' . $row->ukm_id . '" class="aktif btn btn-sm btn-success disable" disabled>Aktif</button>
+				$rows[] = '
+					<button type="button" class="btn btn-sm ' . ($row->is_active == 1 ? "btn-success disable" : "btn-danger") . '" ' . ($row->is_active == 1 ? "disabled" : "") . '>' . ($row->is_active == 1 ? "Aktif" : "Nonaktif") . '</button>
 					';
-				} else {
-					$rows[] = '
-					<button type="button" data-id="' . $row->id . '" data-ukm_id="' . $row->ukm_id . '" class="aktif btn btn-sm btn-danger disable" disabled>Nonaktif</button>
-					';
-				}
 			}
 			$rows[] = $row->tanggal;
 			if ($role->can_edit && $role->can_delete) {

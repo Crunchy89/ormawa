@@ -116,6 +116,16 @@ abstract class MY_Model extends CI_Model
 		}
 		return $this;
 	}
+	public function join($table, $relation)
+	{
+		$this->db->join($table, $relation);
+		return $this;
+	}
+	public function select($field)
+	{
+		$this->db->select($field);
+		return $this;
+	}
 	public function row()
 	{
 		return $this->db->get($this->table)->row();

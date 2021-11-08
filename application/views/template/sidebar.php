@@ -141,7 +141,7 @@ $getMenuAkses = $CI->auth->getMenuAkses();
 							</a>
 							<ul class="nav nav-treeview">
 								<li class="nav-item">
-									<a href="<?= site_url('admin/pengaturan/menu') ?>" class="nav-link <?= $sub_active == 'pembimbing' ? 'active' : '' ?>">
+									<a href="<?= site_url('admin/menu_ukm/pembimbing') ?>" class="nav-link <?= $sub_active == 'pembimbing' ? 'active' : '' ?>">
 										<i class="far fa-circle nav-icon"></i>
 										<p>Pembimbing</p>
 									</a>
@@ -163,6 +163,22 @@ $getMenuAkses = $CI->auth->getMenuAkses();
 					<?php endif; ?>
 
 				<?php endforeach; ?>
+				<li class="nav-item">
+					<a href="<?= site_url('/') ?>" class="nav-link">
+						<i class="nav-icon fas fa-home"></i>
+						<p>
+							Home
+						</p>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a href="<?= site_url('auth/logout') ?>" class="nav-link">
+						<i class="nav-icon fas fa-sign-out-alt"></i>
+						<p>
+							Logout
+						</p>
+					</a>
+				</li>
 			</ul>
 		</nav>
 		<!-- /.sidebar-menu -->

@@ -69,7 +69,12 @@
 								<a class="dropdown-item" href="<?= site_url('artikel') ?>">Budaya</a>
 							</div>
 						</li>
-						<li><a href="<?= site_url('auth') ?>">Masuk</a></li>
+						<?php if ($this->session->userdata('user_id')) : ?>
+							<li><a href="<?= site_url('admin/dashboard') ?>">Dashboard</a></li>
+							<li><a href="<?= site_url('auth/logout') ?>">Logout</a></li>
+						<?php else : ?>
+							<li><a href="<?= site_url('auth') ?>">Masuk</a></li>
+						<?php endif; ?>
 
 						<li>
 							<button class="search">
