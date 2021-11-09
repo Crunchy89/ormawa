@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class ukm extends CI_Controller
+class Ukm extends CI_Controller
 {
 	public function __construct()
 	{

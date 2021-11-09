@@ -1,19 +1,18 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class home extends CI_Controller
+class Kegiatan extends CI_Controller
 {
 	public function __construct()
 	{
 		parent::__construct();
 	}
-
-	// fungsi yang pertama kali akan di load
 	public function index()
 	{
 		$data = [
-			'title' => 'Ukm STMIK Lombok'
+			'title' => 'Kegiatan',
+			'active' => 'kegiatan',
 		];
-		home('home/index', $data);
+		home('home/kegiatan', $data);
 	}
 }

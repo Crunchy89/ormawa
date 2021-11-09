@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
 
-class berita extends CI_Controller
+class Artikel extends CI_Controller
 {
 	public function __construct()
 	{
@@ -10,9 +10,9 @@ class berita extends CI_Controller
 	public function index()
 	{
 		$data = [
-			'title' => 'Berita',
-			'active' => 'berita',
+			'title' => 'Artike',
+			'active' => 'artikel',
 		];
-		home('home/berita', $data);
+		home('home/artikel', $data);
 	}
 }
