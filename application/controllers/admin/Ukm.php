@@ -36,27 +36,9 @@ class Ukm extends CI_Controller
 			$rows = [];
 			$rows[] = ++$no;
 			$rows[] = $row->nama_ukm;
-			if ($role->can_edit) {
-				if ($row->is_active) {
-					$rows[] = '
-					<button type="button" data-uuid="' . $row->uuid . '" class="aktif btn btn-sm btn-success">Aktif</button>
+			$rows[] = '
+					<button type="button" data-uuid="' . $row->uuid . '" class="aktif btn btn-sm btn-' . ($row->is_active == 1 ? "success" : "danger") . ' ' . ($role->can_edit != 1 ? "disable" : "") . '" ' . ($role->can_edit != 1 ? "disabled" : "") . '>' . ($row->is_active == 1 ? "Aktif" : "Nonaktif") . '</button>
 					';
-				} else {
-					$rows[] = '
-					<button type="button" data-uuid="' . $row->uuid . '" class="aktif btn btn-sm btn-danger">Nonaktif</button>
-					';
-				}
-			} else {
-				if ($row->is_active) {
-					$rows[] = '
-					<button type="button" data-uuid="' . $row->uuid . '" class="aktif btn btn-sm btn-success disable" disabled>Aktif</button>
-					';
-				} else {
-					$rows[] = '
-					<button type="button" data-uuid="' . $row->uuid . '" class="aktif btn btn-sm btn-danger disable" disabled>Nonaktif</button>
-					';
-				}
-			}
 			if ($role->can_edit && $role->can_delete) {
 				$rows[] = '
 				<button type="button" data-uuid="' . $row->uuid . '" data-nama_ukm="' . $row->nama_ukm . '" class="edit btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>

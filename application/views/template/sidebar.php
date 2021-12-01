@@ -75,7 +75,7 @@ $getMenuAkses = $CI->auth->getMenuAkses();
 							<a href="<?= site_url('admin/pembimbing') ?>" class="nav-link <?= $active == 'pembimbing' ? 'active' : '' ?>">
 								<i class="nav-icon fas fa-user"></i>
 								<p>
-									Pembimbing
+									Pembimbing UKM
 								</p>
 							</a>
 						</li>

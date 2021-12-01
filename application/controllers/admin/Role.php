@@ -44,15 +44,10 @@ class Role extends CI_Controller
 			$rows = [];
 			$rows[] = ++$no;
 			$rows[] = $row->role;
-			if ($row->id == 1) {
-				$rows[] = "<input type='checkbox' data-uuid='$row->uuid' class='can_insert' " . $this->cek($row->can_insert) . "  disabled/>";
-				$rows[] = "<input type='checkbox' data-uuid='$row->uuid' class='can_delete' " . $this->cek($row->can_delete) . " disabled />";
-				$rows[] = "<input type='checkbox' data-uuid='$row->uuid' class='can_edit' " . $this->cek($row->can_edit) . " disabled />";
-			} else {
-				$rows[] = "<input type='checkbox' data-uuid='$row->uuid' class='can_insert' " . $this->cek($row->can_insert) . "  />";
-				$rows[] = "<input type='checkbox' data-uuid='$row->uuid' class='can_delete' " . $this->cek($row->can_delete) . " />";
-				$rows[] = "<input type='checkbox' data-uuid='$row->uuid' class='can_edit' " . $this->cek($row->can_edit) . " />";
-			}
+			$rows[] = "<input type='checkbox' data-uuid='$row->uuid' class='can_insert' " . $this->cek($row->can_insert) . "  " . ($row->id == 1 ? "disabled" : "") . "/>";
+			$rows[] = "<input type='checkbox' data-uuid='$row->uuid' class='can_delete' " . $this->cek($row->can_delete) . " " . ($row->id == 1 ? "disabled" : "") . "/>";
+			$rows[] = "<input type='checkbox' data-uuid='$row->uuid' class='can_edit' " . $this->cek($row->can_edit) . " " . ($row->id == 1 ? "disabled" : "") . " />";
+
 			if ($role->can_edit && $role->can_delete) {
 				$rows[] = '
 				<button type="button" data-uuid="' . $row->uuid . '" data-role="' . $row->role . '" class="edit btn btn-sm btn-warning"><i class="fas fa-edit"></i></button>

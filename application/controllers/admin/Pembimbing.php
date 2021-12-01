@@ -92,7 +92,13 @@ class Pembimbing extends CI_Controller
 	}
 	private function save()
 	{
-		$ukm_id = htmlspecialchars($this->input->post('ukm_id'));
+		$ukm_id = "";
+		if ($this->session->userdata('role_id') > 1) {
+			$cek = $this->db->from('ukm_anggota')->select('ukm_id')->where('user_id', $this->session->userdata('user_id'))->get()->row();
+			$ukm_id = $cek->ukm_id;
+		} else {
+			$ukm_id = htmlspecialchars($this->input->post('ukm_id'));
+		}
 		$user_id = htmlspecialchars($this->input->post('user_id'));
 		$tanggal = htmlspecialchars($this->input->post('tanggal'));
 		$data = [];

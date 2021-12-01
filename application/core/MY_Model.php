@@ -3,11 +3,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 abstract class MY_Model extends CI_Model
 {
-	public $table;
-	public $id;
-	public $column_order;
-	public $column_search;
-	public $order;
+	protected $table;
+	protected $id;
+	protected $column_order;
+	protected $column_search;
+	protected $order;
 
 	// get query datatable from child
 	abstract function queryTable();

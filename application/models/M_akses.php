@@ -21,10 +21,10 @@ class M_akses extends MY_Model
 	//set Query Datatable in parent
 	public function queryTable()
 	{
-		$this->db->select('role.id, role.role, akses.menu_id');
-		$this->db->from($this->table);
-		$this->db->join('role', 'akses.role_id = role.id', 'right');
-		$this->db->where('role.is_deleted', 0);
-		$this->db->group_by('role.id');
+		$this->db->select('role.id, role.role, akses.menu_id')
+			->from($this->table)
+			->join('role', 'akses.role_id = role.id', 'right')
+			->where('role.is_deleted', 0)
+			->group_by('role.id');
 	}
 }

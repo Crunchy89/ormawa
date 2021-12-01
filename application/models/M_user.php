@@ -30,4 +30,70 @@ class M_user extends MY_Model
 			$this->db->where('user.role_id != 1');
 		}
 	}
+	public function simpan()
+	{
+		$username = htmlspecialchars($this->input->post('username'));
+		$password = htmlspecialchars($this->input->post('password'));
+		$email = htmlspecialchars($this->input->post('email'));
+		$nama = htmlspecialchars($this->input->post('nama'));
+		$role_id = htmlspecialchars($this->input->post('role_id'));
+		$this->db->set('uuid', 'UUID()', false);
+		$data = [
+			'username' => $username,
+			'email' => $email,
+			'password' => password_hash($password, PASSWORD_DEFAULT),
+			'role_id' => $role_id,
+			'nama' => $nama
+		];
+		$cek = $this->save($data);
+		return $this->response($cek, 'ditambah');
+	}
+	public function ubah()
+	{
+		$uuid = htmlspecialchars($this->input->post('uuid'));
+		$username = htmlspecialchars($this->input->post('username'));
+		$email = htmlspecialchars($this->input->post('email'));
+		$nama = htmlspecialchars($this->input->post('nama'));
+		$role_id = htmlspecialchars($this->input->post('role_id'));
+		$data = [
+			'username' => $username,
+			'email' => $email,
+			'nama' => $nama,
+			'role_id' => $role_id
+		];
+		$cek = $this->edit($uuid, $data);
+		return $this->response($cek, 'diubah');
+	}
+	public function reset()
+	{
+		$uuid = htmlspecialchars($this->input->post('uuid'));
+		$password = htmlspecialchars($this->input->post('password'));
+		$data = [
+			'password' => password_hash($password, PASSWORD_DEFAULT),
+		];
+		$cek = $this->edit($uuid, $data);
+		return $this->response($cek, 'diubah');
+	}
+	public function hapus()
+	{
+		$uuid = htmlspecialchars($this->input->post('uuid'));
+		$cek = $this->softDelete($uuid);
+		return $this->response($cek, 'dihapus');
+	}
+	public function is_active()
+	{
+		$uuid = htmlspecialchars($this->input->post('uuid'));
+		$cek = $this->find($uuid);
+		if ($cek->is_active == 1) {
+			$data = [
+				'is_active' => 0,
+			];
+		} else {
+			$data = [
+				'is_active' => 1,
+			];
+		}
+		$cek = $this->edit($uuid, $data);
+		return $this->response($cek, 'diubah');
+	}
 }

@@ -49,15 +49,17 @@
 								<?php endforeach; ?>
 							</select>
 						</div>
-						<div class="form-group">
-							<label for="ukm_id">UKM</label>
-							<select name="ukm_id" id="ukm_id" class="form-control" required>
-								<option value="">Pilih UKM</option>
-								<?php foreach ($ukm as $row) : ?>
-									<option value="<?= $row->id ?>"><?= $row->nama_ukm ?></option>
-								<?php endforeach; ?>
-							</select>
-						</div>
+						<?php if ($this->session->userdata('role_id') < 2) : ?>
+							<div class="form-group">
+								<label for="ukm_id">UKM</label>
+								<select name="ukm_id" id="ukm_id" class="form-control" required>
+									<option value="">Pilih UKM</option>
+									<?php foreach ($ukm as $row) : ?>
+										<option value="<?= $row->id ?>"><?= $row->nama_ukm ?></option>
+									<?php endforeach; ?>
+								</select>
+							</div>
+						<?php endif; ?>
 						<div class="form-group">
 							<label for="tanggal">Tanggal Dilantik</label>
 							<input type="date" class="form-control" name="tanggal" id="tanggal" required>
